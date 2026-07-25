@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Drawing\Utils\Interface\" />
+    <Folder Include="Drawing\Utils\Abstract\" />
+    <Folder Include="Drawing\Shapes\" />
     <Folder Include="DSL\" />
     <Folder Include="Drawing\Graphing\" />
   </ItemGroup>

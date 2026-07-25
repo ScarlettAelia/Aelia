@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aelia.Core.Drawing.Utils;
+namespace Aelia.Core.Drawing.Colors;
 
+/// <summary>
+/// Basic RGBA color struct
+/// </summary>
 public struct RgbaColor
 {
     #region Fields
+
     /// <summary>
     /// Red channel
     /// </summary>
@@ -382,4 +386,10 @@ public struct RgbaColor
         => HashCode.Combine(R, G, B, A);
 
     #endregion Overrides
+
+    #region Convesions
+
+
+
+    #endregion Conversions
 }
