@@ -1,39 +1,40 @@
-﻿using Aelia.Core.Utils.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aelia.Core.Maths.Vector;
+namespace Aelia.Core.Drawing.Shapes;
 
-/// <summary>
-/// n-dimensional vector
-/// </summary>
-public struct VectorN
+public class Circle
 {
     #region Fields
 
-    public double[] Elements { get; init; }
+    public double CenterX;
+    public double CenterY;
+    public double Radius;
 
     #endregion Fields
 
+    #region Properties
+
+    // Put properties here
+
+    #endregion Properties
+
     #region Accessors
 
-    public int Dimensions => Elements.Length;
+    // Put accessors here
 
     #endregion Accessors
 
     #region Constructors
 
-    public VectorN(double[] elements)
-    {
-        if (elements.IsNullOrEmpty()) throw new ArgumentException($"Cannot form a vector with null or empty elements");
-
-        Elements = elements;
-    }
+    // Put constructors here
 
     #endregion Constructors
 
     #region Functions
+
+    // Put functions here
 
     #endregion Functions
 
@@ -41,25 +42,37 @@ public struct VectorN
 
     #region Add
 
+    // Addition
+
     #endregion Add
 
     #region Subtract
+
+    // Subtraction
 
     #endregion Subtract
 
     #region Multiply
 
+    // Multiplication
+
     #endregion Multiply
 
     #region Divide
+
+    // Division
 
     #endregion Divide
 
     #region Equals
 
+    // Equality
+
     #endregion Equals
 
     #region Not Equals
+
+    // Non-equivelance
 
     #endregion Not Equals
 
@@ -67,9 +80,13 @@ public struct VectorN
 
     #region Overrides
 
+    // Put overrides here
+
     #endregion Overrides
 
     #region Conversions
+
+    // Put conversions here
 
     #endregion Conversions
 }

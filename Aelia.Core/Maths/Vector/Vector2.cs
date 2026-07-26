@@ -8,27 +8,41 @@ namespace Aelia.Core.Maths.Vector;
 /// <summary>
 /// 2-dimensional vector
 /// </summary>
-public class Vector2
+public struct Vector2
 {
     #region Fields
 
-    public double[] Elements { get; init; }
+    public double[] Elements { get; set; }
 
     #endregion Fields
 
-    #region Accessors
+    #region Properties
 
-    public int Dimensions => Elements.Length;
+    readonly double X
+    {
+        get => Elements[0];
+        set => Elements[0] = value;
+    }
+    readonly double Y
+    {
+        get => Elements[1];
+        set => Elements[1] = value;
+    }
 
-    #endregion Accessors
+    #endregion Properties
 
     #region Constructors
 
     public Vector2(double[] elements)
     {
-        if (elements.IsNullOrEmpty()) throw new ArgumentException($"Cannot form a vector with null or empty elements");
+        if (elements.Length > 2) throw new ArgumentException();
 
-        Elements = elements;
+        Elements = new double[2];
+
+        for (int i = 0; i < elements.Length; i++)
+        {
+            Elements[i] = elements[i];
+        }
     }
 
     #endregion Constructors

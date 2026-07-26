@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aelia.Core.Maths.Vector;
+namespace Aelia.Core.Drawing.Shapes;
 
-public static class VectorMaths
+public class ShapeStyles
 {
 }

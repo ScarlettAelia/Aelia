@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aelia.Core.Drawing.Utils.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
