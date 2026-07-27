@@ -9,6 +9,8 @@
   <ItemGroup>
     <Folder Include="CattyDsl\" />
     <Folder Include="Drawing\Graphing\" />
+    <Folder Include="Maths\Interfaces\" />
+    <Folder Include="Utils\Interfaces\" />
   </ItemGroup>
 
 </Project>

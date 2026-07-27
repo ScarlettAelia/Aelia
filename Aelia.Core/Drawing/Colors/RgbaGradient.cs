@@ -28,7 +28,7 @@ public class RgbaGradient
     public RgbaGradient(Probability[] positions, RgbaColor[] colors)
     {
         if (positions.Length != colors.Length)
-            throw new ArgumentException();
+            throw new ArgumentException($"positions and colors must have the same length. {positions.Length} != {colors.Length}");
 
         ColorWaypoints = new (Probability Position, RgbaColor Color)[positions.Length];
 
@@ -46,7 +46,8 @@ public class RgbaGradient
 
     #region Functions
 
-    // Put functions here
+    public void AddColorAt() { }
+    public void RemoveColorAt() { }
 
     #endregion Functions
 

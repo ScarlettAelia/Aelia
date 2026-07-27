@@ -5,12 +5,13 @@ using Xunit.Abstractions;
 
 namespace Aelia.Test.TestUtils;
 
-public abstract class MyTestClass
+public abstract class MyTestClass(ITestOutputHelper outputter)
 {
-    private readonly ITestOutputHelper Outputter;
+    public readonly ITestOutputHelper Outputter = outputter;
 
-    public MyTestClass(ITestOutputHelper outputter)
+    public void OutputBasicEquals(object expected, object input, object check, string function = "f()")
     {
-        Outputter = outputter;
+        bool result = expected == check;
+        Outputter.WriteLine($"input: '{input} -> {function} -> {check} == {expected}? {result}");
     }
 }

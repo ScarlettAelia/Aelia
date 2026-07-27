@@ -8,44 +8,22 @@ namespace Aelia.Core.Maths.Vector;
 /// <summary>
 /// 2-dimensional vector
 /// </summary>
-public struct Vector2
+public class Vector2(double[] elements) : VectorN(elements, 2)
 {
-    #region Fields
-
-    public double[] Elements { get; set; }
-
-    #endregion Fields
-
     #region Properties
 
-    readonly double X
+    public double X
     {
         get => Elements[0];
         set => Elements[0] = value;
     }
-    readonly double Y
+    public double Y
     {
         get => Elements[1];
         set => Elements[1] = value;
     }
 
     #endregion Properties
-
-    #region Constructors
-
-    public Vector2(double[] elements)
-    {
-        if (elements.Length > 2) throw new ArgumentException();
-
-        Elements = new double[2];
-
-        for (int i = 0; i < elements.Length; i++)
-        {
-            Elements[i] = elements[i];
-        }
-    }
-
-    #endregion Constructors
 
     #region Functions
 

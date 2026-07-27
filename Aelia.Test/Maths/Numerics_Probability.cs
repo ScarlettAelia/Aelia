@@ -17,7 +17,7 @@ public class Numerics_Probability(ITestOutputHelper outputter) : MyTestClass(out
     [InlineData(true, 0.998)]
     [InlineData(true, 1)]
     [InlineData(false, -1)]
-    [InlineData(true, -0.0000001)]
+    [InlineData(false, -0.0000001)]
     [InlineData(false, 1.00000001)]
     public void Test_Constrution (bool pass, double input)
     {
