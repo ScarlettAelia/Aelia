@@ -16,9 +16,12 @@ public static class ArrayExtensions
     /// <typeparam name="T">Arbitrary type</typeparam>
     /// <param name="objects">Collection to test</param>
     /// <returns><b>true</b> if <paramref name="objects"/> is null or length is 0</returns>
-    public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T> objects)
+    public static bool IsNullOrEmpty<T>([NotNullWhen(false)] this IEnumerable<T> array)
     {
-        return objects == null || !objects.Any();
+        if (array is null || array.Count() == 0)
+            return true;
+        else
+            return array.All(item => item == null);
     }
 
     /// <summary>
@@ -39,7 +42,9 @@ public static class ArrayExtensions
         if (removeAtHash.Max() > array.Length) Debug.WriteLine("One or more requested indexes are out of range for the input array");
         
 
-        int newLength = array.Length - removeAtHash.Length;
+        int newLength = array.Length - removeAtHash.Where(i => i < array.Length).Count();
+
+        if (newLength == array.Length) return array; // all removals are outside of the bounds of array
 
         T[] newArray = new T[newLength];
 
@@ -50,16 +55,25 @@ public static class ArrayExtensions
         while (i < array.Length)
         {
             // if index is not in the remove list, add it to output
-            if (i != removeAtHash[rm] && i < newLength)
+            if (rm < removeAtHash.Length)
+            {
+                if (i != removeAtHash[rm])
+                {
+                    newArray[j] = array[i];
+                    j++;
+                }
+                // otherwise add one to the remove array index
+                else
+                {
+                    rm++;
+                }
+            }
+            else // skip all tests for the remainder after removals are complete
             {
                 newArray[j] = array[i];
-                i++;
+                j++;
             }
-            // otherwise add one to the remove array index
-            else
-            {
-                rm++;
-            }
+            
             i++;
         }
 

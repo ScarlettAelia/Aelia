@@ -14,8 +14,8 @@ public class Extensions_ArrayExtensions(ITestOutputHelper outputter) : MyTestCla
     [Theory]
     [InlineData(true, new int[] { })]
     [InlineData(true, null )]
-    [InlineData(true, "")]
-    [InlineData(false, "false")]
+    [InlineData(true, new char[] { })]
+    [InlineData(false, new char[] { 'f', 'a', 'l', 's', 'e' })]
     [InlineData(false, new int[] {1})]
     public void Test_IsNullOrEmpty<T>(bool expected, T[]? input)
     {
@@ -29,7 +29,9 @@ public class Extensions_ArrayExtensions(ITestOutputHelper outputter) : MyTestCla
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { })]
     [InlineData(new int[] { 2, 3, 4, }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 0, 4 })]
+    [InlineData(new int[] { 2, 3, 4, 5}, new int[] { 1, 2, 3, 4, 5 }, new int[] { 0 })]
     [InlineData(new int[] { 1, 2, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 2, 5 })]
+    [InlineData(new int[] { 1, 2, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 2, 5, 8, 200 })]
     public void TestArray_RemoveItemsAt<T>(T[] expected, T[] initial, int[] indicies)
     {
         T[] check = initial.RemoveItemsAt(indicies);
@@ -39,6 +41,8 @@ public class Extensions_ArrayExtensions(ITestOutputHelper outputter) : MyTestCla
     [Theory]
 
     [InlineData(new int[] { 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, 0)]
+    [InlineData(new int[] { 1, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, 1)]
+    [InlineData(new int[] { 1, 2, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, 2)]
     [InlineData(new int[] { 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4, 5 }, 4)]
     [InlineData(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 }, 5)]
     public void TestSingle_RemoveItemsAt<T>(T[] expected, T[] initial, int index)
