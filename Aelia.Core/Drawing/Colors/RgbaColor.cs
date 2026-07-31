@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Aelia.Core.Drawing.Colors;
 
 /// <summary>
 /// Basic RGBA color struct
 /// </summary>
-public struct RgbaColor
+public partial struct RgbaColor
 {
     #region Fields
 
@@ -62,12 +63,24 @@ public struct RgbaColor
 
     #region Parsing
 
+    [GeneratedRegex("([#]{0,1})(([a-zA-Z0-9]{1,2}){3,4})", RegexOptions.IgnoreCase)]
+    private static partial Regex IsColorHexRegex();
+    /// <summary>
+    /// Tests to see if a string matches RGB-RGBA regex
+    /// </summary>
+    /// <param name="hexString"></param>
+    /// <returns></returns>
+    public static bool IsColorHex(string hexString)
+    {
+        return IsColorHexRegex().IsMatch(hexString);
+    }
+
     /// <summary>
     /// Attempts to parse a <see cref="bool"/> to a <see cref="RgbaColor"/>
     /// </summary>
     /// <param name="input">uint representation of a color</param>
     /// <param name="color">output color</param>
-    /// <param name="bigEndian">is the color using big endian?</param>
+    /// <param name="bigEndian">is the color using big endian? (ABGR)</param>
     /// <returns></returns>
     public static bool TryParseRgba(uint input, out RgbaColor color, bool bigEndian = true)
     {
@@ -93,10 +106,14 @@ public struct RgbaColor
     public static bool TryParseRgba(string input, out RgbaColor color)
     {
         string cleanedInput = input.Trim();
-        _ = cleanedInput.StartsWith('#') ? cleanedInput.TrimStart('#') : cleanedInput;
-        _ = cleanedInput.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase) ? cleanedInput.TrimStart("0x").TrimStart("0X") : cleanedInput;
+        cleanedInput = cleanedInput.StartsWith('#') ? cleanedInput.TrimStart('#') : cleanedInput;
+        cleanedInput = cleanedInput.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase) ? cleanedInput.TrimStart("0x").ToString() : cleanedInput;
 
-        // TODO: regex check here to prevent failed parses
+        if (!IsColorHex(cleanedInput))
+        {
+            color = new RgbaColor();
+            return false;
+        }
 
         byte r = 0xFF;
         byte g = 0xFF;
@@ -138,11 +155,11 @@ public struct RgbaColor
     }
 
     /// <summary>
-    /// 
+    /// Parses a <see cref="bool"/> to a <see cref="RgbaColor"/>
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentException">Failed to parse</exception>
     public static RgbaColor ParseRgba(uint input)
     {
         bool success = TryParseRgba(input, out RgbaColor color);
@@ -153,11 +170,11 @@ public struct RgbaColor
             throw new ArgumentException($"Could not parse '{input}' to RgbaColor");
     }
     /// <summary>
-    /// 
+    ///Parses a <see cref="string"> to a <see cref="RgbaColor"/>
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentException">Failed to parse</exception>
     public static RgbaColor ParseRgba(string input)
     {
         bool success = TryParseRgba(input, out RgbaColor color);
@@ -388,6 +405,8 @@ public struct RgbaColor
     public override readonly int GetHashCode()
         => HashCode.Combine(R, G, B, A);
 
+
+
     #endregion Overrides
 
     #region Convesions
@@ -395,4 +414,8 @@ public struct RgbaColor
 
 
     #endregion Conversions
+
+    
 }
+
+    

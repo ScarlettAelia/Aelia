@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aelia.Core.Maths.Vector;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,7 +16,7 @@ public interface IDrawable
     /// Draw the object as a SVG vector image.
     /// </summary>
     /// <returns></returns>
-    public object DrawVector();
+    public Vector2Double DrawVector();
     /// <summary>
     /// Draw the object as a raster image.
     /// </summary>
