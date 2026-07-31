@@ -96,6 +96,8 @@ public struct RgbaColor
         _ = cleanedInput.StartsWith('#') ? cleanedInput.TrimStart('#') : cleanedInput;
         _ = cleanedInput.StartsWith("0x", StringComparison.CurrentCultureIgnoreCase) ? cleanedInput.TrimStart("0x").TrimStart("0X") : cleanedInput;
 
+        // TODO: regex check here to prevent failed parses
+
         byte r = 0xFF;
         byte g = 0xFF;
         byte b = 0xFF;

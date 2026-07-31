@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aelia.Core.Utils.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,12 +24,7 @@ public static class VectorMaths
         if (vector1.Length != vector2.Length)
             throw new ArgumentException();
 
-        double[] difference = new double[vector1.Length];
-
-        for (int i = 0; i < difference.Length; i++)
-        {
-            difference[i] = vector2[i] - vector1[i];
-        }
+        double[] difference = vector2.SubtractByElement(vector1);
 
         return Magnitude(difference);
     }

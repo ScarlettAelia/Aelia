@@ -6,5 +6,6 @@ namespace Aelia.Core.Maths.Vector;
 
 public interface IVector
 {
-    public double[] Elements { get; }
+    public double[] Elements { get; set; }
+    public int Dimensions { get; }
 }

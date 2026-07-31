@@ -8,7 +8,7 @@ namespace Aelia.Core.Maths.Vector;
 /// <summary>
 /// 3-dimensional vector of doubles
 /// </summary>
-public class Vector3(double[] elements) : VectorN(elements, 3)
+public class Vector3Double(double[] elements) : BaseVector<Vector3Double>(elements, 3)
 {
     #region Properties
 
@@ -30,43 +30,9 @@ public class Vector3(double[] elements) : VectorN(elements, 3)
 
     #endregion Properties
 
-    #region Functions
+    #region Constructors
 
-    #endregion Functions
+    public Vector3Double(double x = 0, double y = 0, double z = 0) : this(elements: [x, y, z]) { }
 
-    #region Operators
-
-    #region Add
-
-    #endregion Add
-
-    #region Subtract
-
-    #endregion Subtract
-
-    #region Multiply
-
-    #endregion Multiply
-
-    #region Divide
-
-    #endregion Divide
-
-    #region Equals
-
-    #endregion Equals
-
-    #region Not Equals
-
-    #endregion Not Equals
-
-    #endregion Operators
-
-    #region Overrides
-
-    #endregion Overrides
-
-    #region Conversions
-
-    #endregion Conversions
+    #endregion Constructors
 }
