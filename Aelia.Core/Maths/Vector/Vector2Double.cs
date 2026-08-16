@@ -1,14 +1,9 @@
-﻿using Aelia.Core.Utils.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aelia.Core.Maths.Vector;
+﻿namespace Aelia.Core.Maths.Vector;
 
 /// <summary>
 /// 2-dimensional vector of doubles
 /// </summary>
-public class Vector2Double(double[] elements) : BaseVector<Vector2Double>(elements, 2)
+public class Vector2Double(double[] elements) : BaseVector(elements, 2)
 {
     #region Properties
 

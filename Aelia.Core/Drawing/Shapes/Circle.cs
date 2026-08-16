@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Aelia.Core.Drawing.Shapes;
+﻿namespace Aelia.Core.Drawing.Shapes;
 
 public class Circle
 {
     #region Fields
 
-    public double CenterX;
-    public double CenterY;
-    public double Radius;
+
 
     #endregion Fields
 
     #region Properties
 
-    // Put properties here
+    public double Radius;
 
     #endregion Properties
 

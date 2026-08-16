@@ -10,18 +10,17 @@ namespace Aelia.Core.Maths.Vector;
 /// <summary>
 /// n-dimensional vector
 /// </summary>
-public class BaseVector<T> : IVector,
-                             IAdditionOperators<BaseVector<T>, BaseVector<T>, BaseVector<T>>,
-                             IAdditionOperators<BaseVector<T>, double, BaseVector<T>>,
-                             ISubtractionOperators<BaseVector<T>, BaseVector<T>, BaseVector<T>>,
-                             ISubtractionOperators<BaseVector<T>, double, BaseVector<T>>,
-                             IMultiplyOperators<BaseVector<T>, BaseVector<T>, BaseVector<T>>,
-                             IMultiplyOperators<BaseVector<T>, double, BaseVector<T>>,
-                             IDivisionOperators<BaseVector<T>, BaseVector<T>, BaseVector<T>>,
-                             IDivisionOperators<BaseVector<T>, double, BaseVector<T>>,
-                             IEqualityOperators<BaseVector<T>, BaseVector<T>, bool>,
-                             IEqualityOperators<BaseVector<T>, double, bool>
-                             where T : BaseVector<T>
+public class BaseVector : IVector,
+                          IAdditionOperators<BaseVector, BaseVector, BaseVector>,
+                          IAdditionOperators<BaseVector, double, BaseVector>,
+                          ISubtractionOperators<BaseVector, BaseVector, BaseVector>,
+                          ISubtractionOperators<BaseVector, double, BaseVector>,
+                          IMultiplyOperators<BaseVector, BaseVector, BaseVector>,
+                          IMultiplyOperators<BaseVector, double, BaseVector>,
+                          IDivisionOperators<BaseVector, BaseVector, BaseVector>,
+                          IDivisionOperators<BaseVector, double, BaseVector>,
+                          IEqualityOperators<BaseVector, BaseVector, bool>,
+                          IEqualityOperators<BaseVector, double, bool>
 {
     #region Fields
 
@@ -60,13 +59,13 @@ public class BaseVector<T> : IVector,
 
     #region Functions
 
-    public static double Magnitude<V>(BaseVector<V> vector) where V : BaseVector<V>
+    public static double Magnitude(BaseVector vector)
         => VectorMaths.Magnitude(vector.Elements);
     public double Magnitude() => VectorMaths.Magnitude(Elements);
 
-    public static double MagnitudeBetween<V1, V2>(BaseVector<V1> vector1, BaseVector<V2> vector2) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static double MagnitudeBetween(BaseVector vector1, BaseVector vector2)
         => VectorMaths.MagnitudeBetween(vector1.Elements, vector2.Elements);
-    public double MagnitudeBetween<V>(BaseVector<V> other) where V : BaseVector<V>
+    public double MagnitudeBetween(BaseVector other)
         => VectorMaths.MagnitudeBetween(this.Elements, other.Elements);
 
     #endregion Functions
@@ -75,108 +74,108 @@ public class BaseVector<T> : IVector,
 
     #region Add
 
-    public static BaseVector<V1> Add<V1, V2>(BaseVector<V1> left, BaseVector<V2> right) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static BaseVector Add(BaseVector left, BaseVector right)
         => left.Elements.AddByElement(right.Elements);
-    public BaseVector<T> Add<V>(BaseVector<V> other) where V : BaseVector<V>
+    public BaseVector Add(BaseVector other)
         => Add(this, other);
-    public static BaseVector<V> Add<V>(BaseVector<V> left, double right) where V : BaseVector<V>
+    public static BaseVector Add(BaseVector left, double right)
         => left.Elements.AddByElement(right);
-    public BaseVector<T> Add(double other)
+    public BaseVector Add(double other)
         => Add(this, other);
 
-    public static BaseVector<T> operator +(BaseVector<T> left, BaseVector<T> right)
+    public static BaseVector operator +(BaseVector left, BaseVector right)
         => Add(left, right);
-    public static BaseVector<T> operator +(BaseVector<T> left, double right)
+    public static BaseVector operator +(BaseVector left, double right)
         => Add(left, right);
 
     #endregion Add
 
     #region Subtract
 
-    public static BaseVector<V1> Subtract<V1, V2>(BaseVector<V1> left, BaseVector<V2> right) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static BaseVector Subtract(BaseVector left, BaseVector right)
         => left.Elements.SubtractByElement(right.Elements);
-    public BaseVector<T> Subtract<V>(BaseVector<V> other) where V : BaseVector<V>
+    public BaseVector Subtract(BaseVector other) 
         => Subtract(this, other);
-    public static BaseVector<V> Subtract<V>(BaseVector<V> left, double right) where V : BaseVector<V>
+    public static BaseVector Subtract(BaseVector left, double right) 
         => left.Elements.SubtractByElement(right);
-    public BaseVector<T> Subtract(double other)
+    public BaseVector Subtract(double other)
         => Subtract(this, other);
 
-    public static BaseVector<T> operator -(BaseVector<T> left, BaseVector<T> right)
+    public static BaseVector operator -(BaseVector left, BaseVector right)
         => Subtract(left, right);
-    public static BaseVector<T> operator -(BaseVector<T> left, double right)
+    public static BaseVector operator -(BaseVector left, double right)
         => Subtract(left, right);
 
     #endregion Subtract
 
     #region Multiply
 
-    public static BaseVector<V1> Multiply<V1, V2>(BaseVector<V1> left, BaseVector<V2> right) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static BaseVector Multiply(BaseVector left, BaseVector right)
         => left.Elements.MultiplyByElement(right.Elements);
-    public BaseVector<T> Multiply<V>(BaseVector<V> other) where V : BaseVector<V>
+    public BaseVector Multiply(BaseVector other)
         => Multiply(this, other);
-    public static BaseVector<V> Multiply<V>(BaseVector<V> left, double right) where V : BaseVector<V>
+    public static BaseVector Multiply(BaseVector left, double right)
         => left.Elements.MultiplyByElement(right);
-    public BaseVector<T> Multiply(double other)
+    public BaseVector Multiply(double other)
         => Multiply(this, other);
 
-    public static BaseVector<T> operator *(BaseVector<T> left, BaseVector<T> right)
+    public static BaseVector operator *(BaseVector left, BaseVector right)
         => Multiply(left, right);
-    public static BaseVector<T> operator *(BaseVector<T> left, double right)
+    public static BaseVector operator *(BaseVector left, double right)
         => Multiply(left, right);
 
     #endregion Multiply
 
     #region Divide
 
-    public static BaseVector<V1> Divide<V1, V2>(BaseVector<V1> left, BaseVector<V2> right) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static BaseVector Divide(BaseVector left, BaseVector right) 
         => left.Elements.DivideByElement(right.Elements);
-    public BaseVector<T> Divide<V>(BaseVector<V> other) where V : BaseVector<V>
+    public BaseVector Divide(BaseVector other)
         => Divide(this, other);
-    public static BaseVector<V> Divide<V>(BaseVector<V> left, double right) where V : BaseVector<V>
+    public static BaseVector Divide(BaseVector left, double right)
         => left.Elements.DivideByElement(right);
-    public BaseVector<T> Divide(double other)
+    public BaseVector Divide(double other)
         => Divide(this, other);
 
-    public static BaseVector<T> operator /(BaseVector<T> left, BaseVector<T> right)
+    public static BaseVector operator /(BaseVector left, BaseVector right)
         => Divide(left, right);
-    public static BaseVector<T> operator /(BaseVector<T> left, double right)
+    public static BaseVector operator /(BaseVector left, double right)
         => Divide(left, right);
 
     #endregion Divide
 
     #region Equals
 
-    public static bool Equals<V1, V2>(BaseVector<V1> left, BaseVector<V2> right) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static bool Equals(BaseVector left, BaseVector right)
         => left.Elements == right.Elements;
-    public bool Equals<V>(BaseVector<V> other) where V : BaseVector<V>
+    public bool Equals(BaseVector other)
         => Equals(this, other);
-    public static bool Equals<V>(BaseVector<V> left, double right) where V : BaseVector<V>
+    public static bool Equals(BaseVector left, double right)
         => left.Elements.All(e => e == right);
     public bool Equals(double other)
         => Equals(this, other);
 
-    public static bool operator ==(BaseVector<T>? left, BaseVector<T>? right)
+    public static bool operator ==(BaseVector? left, BaseVector? right)
         => left.Equals(right);
-    public static bool operator ==(BaseVector<T>? left, double right)
+    public static bool operator ==(BaseVector? left, double right)
         => left.Equals(right);
 
     #endregion Equals
 
     #region Not Equals
 
-    public static bool NotEquals<V1, V2>(BaseVector<V1> left, BaseVector<V2> right) where V1 : BaseVector<V1> where V2 : BaseVector<V2>
+    public static bool NotEquals(BaseVector left, BaseVector right) 
         => left.Elements != right.Elements;
-    public bool NotEquals<V>(BaseVector<V> other) where V : BaseVector<V>
+    public bool NotEquals(BaseVector other)
         => NotEquals(this, other);
-    public static bool NotEquals<V>(BaseVector<V> left, double right) where V : BaseVector<V>
+    public static bool NotEquals(BaseVector left, double right)
         => left.Elements.Any(e => e != right);
     public bool NotEquals(double other)
         => Equals(this, other);
 
-    public static bool operator !=(BaseVector<T>? left, BaseVector<T>? right)
+    public static bool operator !=(BaseVector? left, BaseVector? right)
         => left.NotEquals(right);
-    public static bool operator !=(BaseVector<T>? left, double right)
+    public static bool operator !=(BaseVector? left, double right)
         => left.NotEquals(right);
 
     #endregion Not Equals
@@ -189,7 +188,8 @@ public class BaseVector<T> : IVector,
 
     #region Conversions
 
-    public static implicit operator BaseVector<T>(double[] elements) => new(elements);
+    public static BaseVector ToVector(double[] elements) => new(elements);
+    public static implicit operator BaseVector(double[] elements) => new(elements);
 
     #endregion Conversions
 }
